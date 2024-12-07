@@ -39,13 +39,14 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        fullname = request.form['fullname']
+        email = request.form['email']
         password = request.form['password']
         hashed_password = generate_password_hash(password, method='sha256')
         # Сохранение данных пользователя в Excel файл
-        save_user_to_excel(username, hashed_password)
+        save_user_to_excel(fullname, email, hashed_password)
         return redirect(url_for('login'))
-    return render_template('register.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -63,7 +64,7 @@ def login():
         except Exception as e:
             print(f"Ошибка при чтении файла Excel: {e}")
         return 'Invalid username or password'
-    return render_template('login.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')
@@ -75,7 +76,7 @@ def logout():
 @app.route('/order_form', methods=['GET', 'POST'])
 def order_form():
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     # При первой загрузке страницы загружаем данные для обоих вариантов
     variant1_data = read_excel("Вариант1")
     variant2_data = read_excel("Вариант2")
