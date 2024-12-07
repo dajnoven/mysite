@@ -90,10 +90,14 @@ body {
     background-color: #f4f4f4;
 }
 
+.order-table-heading {
+    text-align: center; /* Центрируем заголовок таблицы */
+}
+
 .button-group {
+    margin-top: 20px; /* Отступ сверху */
     display: flex;
-    justify-content: flex-end; /* Выравнивание кнопки по правому краю */
-    margin-top: 20px;
+    justify-content: center; /* Центрирование кнопки */
 }
 
 .confirm {
