@@ -20,13 +20,22 @@ def read_excel(sheet_name):
         return []
 
 
-def save_user_to_excel(username, password):
-    user_data = {'username': username, 'password': password}
+def save_user_to_excel(username, email, password):
+    user_data = {'username': username, 'email': email, 'password': password}
     df = pd.DataFrame([user_data])
     # Проверяем, существует ли файл
-    file_exists = os.path.isfile('users.xlsx')
-    with pd.ExcelWriter('users.xlsx', mode='a', if_sheet_exists='overlay') as writer:
+    file_exists = os.path.isfile('data/users.xlsx')
+    with pd.ExcelWriter('data/users.xlsx', mode='a', if_sheet_exists='overlay') as writer:
         df.to_excel(writer, index=False, header=not file_exists)
+
+
+def user_exists(username):
+    try:
+        users = pd.read_excel('data/users.xlsx').to_dict(orient='records')
+        return any(user['username'] == username for user in users)
+    except Exception as e:
+        print(f"Ошибка при чтении файла Excel: {e}")
+        return False
 
 
 @app.route('/')
@@ -42,8 +51,9 @@ def register():
         fullname = request.form['fullname']
         email = request.form['email']
         password = request.form['password']
+        if user_exists(fullname):
+            return 'Пользователь уже существует. Попробуйте другое имя.'
         hashed_password = generate_password_hash(password, method='sha256')
-        # Сохранение данных пользователя в Excel файл
         save_user_to_excel(fullname, email, hashed_password)
         return redirect(url_for('login'))
     return redirect(url_for('index'))
@@ -54,16 +64,15 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # Чтение данных пользователей из Excel файла
         try:
-            users = pd.read_excel('users.xlsx').to_dict(orient='records')
+            users = pd.read_excel('data/users.xlsx').to_dict(orient='records')
             user = next((user for user in users if user['username'] == username), None)
             if user and check_password_hash(user['password'], password):
                 session['username'] = user['username']
                 return redirect(url_for('order_form'))
         except Exception as e:
             print(f"Ошибка при чтении файла Excel: {e}")
-        return 'Invalid username or password'
+        return 'Неправильное имя пользователя или пароль.'
     return redirect(url_for('index'))
 
 
@@ -77,7 +86,6 @@ def logout():
 def order_form():
     if 'username' not in session:
         return redirect(url_for('index'))
-    # При первой загрузке страницы загружаем данные для обоих вариантов
     variant1_data = read_excel("Вариант1")
     variant2_data = read_excel("Вариант2")
     return render_template("form.html", variant1_data=variant1_data, variant2_data=variant2_data)
@@ -85,8 +93,7 @@ def order_form():
 
 @app.route('/load_products', methods=['POST'])
 def load_products():
-    variant = request.form.get('variant')  # Чтение параметра из формы
-    # Загрузка данных в зависимости от варианта
+    variant = request.form.get('variant')
     if variant == 'variant1':
         products = read_excel("Вариант1")
     elif variant == 'variant2':
@@ -100,7 +107,6 @@ def load_products():
 def save_user_data():
     user_data = request.form.to_dict()
     df = pd.DataFrame([user_data])
-    # Проверяем, существует ли файл
     file_exists = os.path.isfile('user_data.xlsx')
     with pd.ExcelWriter('user_data.xlsx', mode='a', if_sheet_exists='overlay') as writer:
         df.to_excel(writer, index=False, header=not file_exists)
