@@ -1,229 +1,150 @@
-.container {
-    background-color: rgba(255, 255, 255, 0.8); /* Белый с прозрачностью */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    margin: auto;
-}
-
 body {
-    background-image: url('/static/images/background.jpg'); /* Замените на ваш путь */
+    background-image: url('/static/images/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Фиксирует фон для эффекта параллакса */
+    background-attachment: fixed;
     background-repeat: no-repeat;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
 
-
-/* Обертка контейнера для создания белого блока поверх фона */
-.container {
-    background-color: rgba(255, 255, 255, 0.9); /* Белый цвет с прозрачностью */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Легкая тень для выделения */
-}
-
-
-.header {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-input, textarea {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-textarea {
-    height: 60px;
-}
-
-.order-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
-}
-
-.order-table th, .order-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-}
-
-.order-table th {
-    background-color: #f1f1f1;
-    font-weight: bold;
-}
-
-.order-table-heading {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-/* Устанавливаем ширину колонки количества */
-.order-table .quantity {
-    width: 60px; /* Задаем фиксированную ширину */
-    padding: 5px; /* Уменьшаем отступы внутри поля */
-    text-align: center; /* Центрируем текст внутри поля */
-}
-
-
-.product-selection {
-    margin-bottom: 15px;
-}
-
-.product-selection h4 {
-    font-weight: bold;
-    text-align: center;
-}
-
-.product-selection label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.quantity {
-    text-align: right;
-    font-size: 14px;
-}
-
-.sum {
-    text-align: right;
-    font-weight: bold;
-}
-
-.button-group {
+.header-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
+.header-container h1 {
+    margin: 0;
+    font-size: 24px;
 }
 
-.variant-buttons {
+.header-container nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 10px;
+}
+
+.header-container nav ul li {
+    margin-left: 20px;
+}
+
+.header-container nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    align-items: center;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
 }
 
-.variant-button {
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    background-color: #28a745;
+    color: #fff;
     padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-    cursor: pointer;
-    font-size: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.variant-button.active {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
+.container {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
 }
 
-.variant-button:hover {
-    background-color: #ddd;
+.about, .products, .contact {
+    margin-bottom: 40px;
 }
 
-
-button.cancel {
-    background-color: #dc3545;
-    color: white;
+.about h2, .products h2, .contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-button.confirm {
-    background-color: #28a745;
-    color: white;
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.product-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
 }
 
-/* Адаптивность для мобильных устройств */
+.product-item h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
-    .container {
-        width: 90%; /* Уменьшаем ширину контейнера */
-        padding: 15px; /* Уменьшаем отступы */
+    .header-container {
+        flex-direction: column;
     }
 
-    .header {
-        font-size: 16px; /* Уменьшаем размер шрифта заголовка */
+    .header-container nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-container nav ul li {
+        margin-left: 0;
         margin-bottom: 10px;
     }
 
-    input, textarea {
-        font-size: 12px; /* Уменьшаем размер шрифта */
-        padding: 6px; /* Уменьшаем отступы внутри полей */
-    }
-
-    .order-table th, .order-table td {
-        padding: 6px; /* Уменьшаем отступы в ячейках таблицы */
-        font-size: 12px; /* Уменьшаем шрифт в таблице */
-    }
-
-    .order-table-heading {
-        font-size: 14px; /* Уменьшаем размер шрифта заголовка таблицы */
-    }
-
-    .variant-selection {
-        align-items: flex-start; /* Выравниваем чекбоксы по левому краю */
-    }
-
-    .variant-selection label {
-        font-size: 14px; /* Уменьшаем размер шрифта */
-        margin-bottom: 8px; /* Уменьшаем расстояние между элементами */
-    }
-
-    button {
-        padding: 8px 15px; /* Уменьшаем размер кнопок */
-        font-size: 12px; /* Уменьшаем шрифт на кнопках */
-    }
-
-    .button-group {
-        flex-direction: column; /* Размещаем кнопки вертикально */
-        align-items: stretch; /* Кнопки растягиваются на всю ширину */
-        gap: 10px; /* Расстояние между кнопками */
+    .product-item {
+        width: calc(50% - 20px);
     }
 }
 
-/* Адаптивность для устройств с очень маленьким экраном */
 @media (max-width: 480px) {
-    .header {
-        font-size: 14px; /* Еще меньше размер шрифта */
-    }
-
-    input, textarea {
-        font-size: 10px; /* Еще меньше шрифт */
-        padding: 5px; /* Еще меньше отступы */
-    }
-
-    .order-table th, .order-table td {
-        font-size: 10px; /* Еще меньше шрифт таблицы */
-    }
-
-    button {
-        padding: 6px 10px; /* Еще меньше кнопки */
-        font-size: 10px; /* Еще меньше шрифт кнопок */
+    .product-item {
+        width: 100%;
     }
 }
-
-
-
