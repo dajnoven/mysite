@@ -72,16 +72,17 @@ body {
 }
 
 .order-table {
-    width: 100%;
-    margin-top: 20px;
+    width: 60%; /* Уменьшить ширину таблицы */
+    margin: 20px auto; /* Центрировать таблицу */
     border-collapse: collapse;
+    text-align: center; /* Центрирование содержимого таблицы */
 }
 
 .order-table th,
 .order-table td {
     border: 1px solid #ccc;
     padding: 10px;
-    text-align: left;
+    text-align: center; /* Центрирование содержимого таблицы */
     color: #333;
 }
 
@@ -91,13 +92,12 @@ body {
 
 .button-group {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* Выравнивание кнопки по правому краю */
     margin-top: 20px;
 }
 
 .confirm {
-    display: block;
-    width: 100%;
+    width: 20%; /* Уменьшить ширину кнопки */
     font-weight: 700;
     text-transform: uppercase;
     font-size: 14px;
@@ -108,7 +108,6 @@ body {
     border-radius: 10px; /* Increase border-radius for more rounded appearance */
     background-color: #28a745; /* Green color for submit button */
     cursor: pointer;
-    margin-top: 20px;
     -webkit-transition: background-color .3s ease;
     transition: background-color .3s ease;
 }
@@ -145,6 +144,7 @@ body {
 
     .button-group {
         flex-direction: column;
+        align-items: center; /* Центрирование кнопки для мобильных устройств */
     }
 
     .confirm {
