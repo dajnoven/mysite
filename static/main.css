@@ -19,6 +19,9 @@ body {
     width: 100%;
     padding-top: 60px;
     padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .frame {
@@ -45,12 +48,6 @@ body {
 
 .frame-long {
     height: 615px;
-}
-
-.frame-short {
-    height: 400px;
-    margin-top: 50px;
-    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
@@ -556,4 +553,90 @@ a.btn-goback:hover {
     fill: #1059FF;
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
+}
+
+/* Общие настройки для маленьких экранов */
+@media (max-width: 768px) {
+    .container {
+        padding-top: 30px;
+        padding-bottom: 50px;
+        flex-direction: column;
+    }
+
+    .frame {
+        width: 90%;
+        height: auto;
+    }
+
+    .form-signin, .form-signup {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .btn-signup, .btn-signin {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .profile-photo {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .cover-photo {
+        height: 100px;
+    }
+}
+
+/* Для экранов сверхмалого размера */
+@media (max-width: 480px) {
+    .form-styling {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    label {
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .form-signin input, .form-signup input {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: contain;
+    }
+
+    .frame {
+        background-size: contain;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-signup, .btn-signin {
+        font-size: 12px;
+        height: 40px;
+    }
 }

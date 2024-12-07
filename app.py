@@ -13,7 +13,7 @@ def read_excel(sheet_name):
     """Чтение данных из указанного листа Excel."""
     try:
         # Загружаем данные с указанного листа
-        data = pd.read_excel(EXCEL_FILE, sheet_name=sheet_name)
+        data = pd.read_excel(EXCEL_FILE, sheet_name=sheet_name, engine='openpyxl')
         return data.to_dict(orient="records")  # Возвращаем данные в виде списка словарей
     except Exception as e:
         print(f"Ошибка при чтении файла Excel: {e}")
@@ -23,15 +23,17 @@ def read_excel(sheet_name):
 def save_user_to_excel(username, email, password):
     user_data = {'username': username, 'email': email, 'password': password}
     df = pd.DataFrame([user_data])
-    # Проверяем, существует ли файл
     file_exists = os.path.isfile('data/users.xlsx')
-    with pd.ExcelWriter('data/users.xlsx', mode='a', if_sheet_exists='overlay') as writer:
-        df.to_excel(writer, index=False, header=not file_exists)
+    if file_exists:
+        existing_df = pd.read_excel('data/users.xlsx', engine='openpyxl')
+        df = pd.concat([existing_df, df], ignore_index=True)
+    with pd.ExcelWriter('data/users.xlsx', engine='openpyxl', mode='w') as writer:
+        df.to_excel(writer, index=False, header=True)
 
 
 def user_exists(username):
     try:
-        users = pd.read_excel('data/users.xlsx').to_dict(orient='records')
+        users = pd.read_excel('data/users.xlsx', engine='openpyxl').to_dict(orient='records')
         return any(user['username'] == username for user in users)
     except Exception as e:
         print(f"Ошибка при чтении файла Excel: {e}")
@@ -53,7 +55,7 @@ def register():
         password = request.form['password']
         if user_exists(fullname):
             return 'Пользователь уже существует. Попробуйте другое имя.'
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         save_user_to_excel(fullname, email, hashed_password)
         return redirect(url_for('login'))
     return redirect(url_for('index'))
@@ -65,7 +67,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         try:
-            users = pd.read_excel('data/users.xlsx').to_dict(orient='records')
+            users = pd.read_excel('data/users.xlsx', engine='openpyxl').to_dict(orient='records')
             user = next((user for user in users if user['username'] == username), None)
             if user and check_password_hash(user['password'], password):
                 session['username'] = user['username']
@@ -108,8 +110,11 @@ def save_user_data():
     user_data = request.form.to_dict()
     df = pd.DataFrame([user_data])
     file_exists = os.path.isfile('user_data.xlsx')
-    with pd.ExcelWriter('user_data.xlsx', mode='a', if_sheet_exists='overlay') as writer:
-        df.to_excel(writer, index=False, header=not file_exists)
+    if file_exists:
+        existing_df = pd.read_excel('user_data.xlsx', engine='openpyxl')
+        df = pd.concat([existing_df, df], ignore_index=True)
+    with pd.ExcelWriter('user_data.xlsx', engine='openpyxl', mode='w') as writer:
+        df.to_excel(writer, index=False, header=True)
     return jsonify({'message': 'Дані збережено!'})
 
 

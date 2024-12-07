@@ -1,0 +1,174 @@
+html, body * {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: -webkit-linear-gradient(
+            rgba(246, 247, 249, 0.8),
+            rgba(246, 247, 249, 0.8)),
+    url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/sky-clouds-cloudy-mountain.jpg) no-repeat center center fixed;
+    background: linear-gradient(
+            rgba(246, 247, 249, 0.8),
+            rgba(246, 247, 249, 0.8)),
+    url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/sky-clouds-cloudy-mountain.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.user-options {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#profile-link,
+#logout-button {
+    background-color: #1059FF;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#profile-link:hover,
+#logout-button:hover {
+    background-color: #0F4FE6;
+}
+
+.variant-selection {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.variant-buttons {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.variant-button {
+    background-color: #1059FF;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px; /* Increase border-radius for more rounded appearance */
+    cursor: pointer;
+    -webkit-transition: background-color .3s ease;
+    transition: background-color .3s ease;
+}
+
+.variant-button.active,
+.variant-button:hover {
+    background-color: #28a745; /* Green color for active/selected variant */
+}
+
+.order-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    color: #333;
+}
+
+.order-table th {
+    background-color: #f4f4f4;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.confirm {
+    display: block;
+    width: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 10px; /* Increase border-radius for more rounded appearance */
+    background-color: #28a745; /* Green color for submit button */
+    cursor: pointer;
+    margin-top: 20px;
+    -webkit-transition: background-color .3s ease;
+    transition: background-color .3s ease;
+}
+
+.confirm:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.confirm:hover:enabled {
+    background-color: #218838; /* Darker green color for hover state */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-top: 30px;
+        padding-bottom: 50px;
+    }
+
+    .variant-buttons {
+        flex-direction: column;
+    }
+
+    .variant-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .order-table th,
+    .order-table td {
+        padding: 5px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .confirm {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Additional responsive adjustments for smaller devices */
+@media (max-width: 480px) {
+    .variant-buttons {
+        gap: 5px;
+    }
+
+    .variant-button {
+        padding: 8px 15px;
+    }
+
+    .order-table th,
+    .order-table td {
+        font-size: 12px;
+    }
+
+    .confirm {
+        padding: 8px;
+    }
+}

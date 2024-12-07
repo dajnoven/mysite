@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Підтвердження замовлення</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/form.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container">
+    <div class="user-options">
+        <a href="/profile" id="profile-link">Профіль</a>
+        <button id="logout-button">Вихід</button>
+    </div>
     <div class="header">Підтвердження замовлення</div>
 
     <form method="POST" id="order-form">
-        <!-- Данные партнера -->
-        <h4>Дані партнера</h4>
-        <input type="tel" name="partner_phone" placeholder="Телефон" required>
-
-        <!-- Данные получателя -->
-        <h4>Дані отримувача</h4>
-        <input type="tel" name="recipient_phone" placeholder="Телефон" required>
-        <input type="text" name="recipient_name" placeholder="ПІБ" required>
-        <input type="text" name="recipient_city" placeholder="Населений пункт" required>
-        <textarea name="comment" placeholder="Примітка"></textarea>
-
         <!-- Чекбоксы для выбора варианта -->
         <div class="variant-selection">
             <h4>Виберіть варіант:</h4>
@@ -178,6 +171,22 @@
 
     // Проверка на ввод в поля
     $('#order-form').on("input change", validateForm);
+
+    // Логика для кнопки "Вихід"
+    document.getElementById('logout-button').addEventListener('click', function () {
+        fetch('/logout', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/';
+            }
+        }).catch(error => {
+            console.error('Ошибка выхода:', error);
+        });
+    });
 </script>
 
 </body>
